@@ -10,73 +10,74 @@ const LoginPage: React.FC = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulación de autenticación
-    if (username) { // Solo verificamos que el username no esté vacío para la simulación
+    if (username) {
       setUserProfile({
         username: username,
-        email: `${username.toLowerCase().replace(/\s+/g, '.')}@example.com`,
+        email: `${username.toLowerCase().replace(/\s+/g, '.')}@mail.udp.cl`,
         profilePictureUrl: `https://picsum.photos/seed/${username}/100/100`,
       });
-      navigate('/'); // Redirigir a la página de inicio o a /profile
+      navigate('/home'); // Redirige a la página principal de la app
     } else {
-      alert('Por favor, ingresa un nombre de usuario.');
+      alert('Por favor, ingresa tu correo institucional.');
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-200px)] py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-rei-card-light dark:bg-rei-card-dark p-10 rounded-xl shadow-2xl">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-rei-blue dark:text-rei-green">
-            Iniciar Sesión
-          </h2>
-        </div>
-        <form className="mt-8 space-y-6" onSubmit={handleLogin}>
-          <input type="hidden" name="remember" defaultValue="true" />
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="username" className="sr-only">
-                Nombre de usuario
-              </label>
-              <input
-                id="username"
-                name="username"
-                type="text"
-                autoComplete="username"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-rei-text-light dark:text-rei-text-dark bg-white dark:bg-gray-700 rounded-t-md focus:outline-none focus:ring-rei-blue dark:focus:ring-rei-green focus:border-rei-blue dark:focus:border-rei-green focus:z-10 sm:text-sm"
-                placeholder="Nombre de usuario (ej: devChile)"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="password_fake" className="sr-only">
-                Contraseña
-              </label>
-              <input
-                id="password_fake"
-                name="password_fake"
-                type="password"
-                autoComplete="current-password"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-rei-text-light dark:text-rei-text-dark bg-white dark:bg-gray-700 rounded-b-md focus:outline-none focus:ring-rei-blue dark:focus:ring-rei-green focus:border-rei-blue dark:focus:border-rei-green focus:z-10 sm:text-sm"
-                placeholder="Contraseña (simulada)"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-          </div>
-
+    // Contenedor principal con imagen de fondo y superposición oscura
+    <div 
+      className="fixed inset-0 flex items-center justify-center bg-cover bg-center font-sans"
+      style={{ backgroundImage: "url('https://www.udp.cl/cms/wp-content/uploads/2021/06/fee.jpeg')" }}
+    >
+      <div className="absolute inset-0 bg-black/40"></div>
+      
+      {/* Caja de Login, inspirada en login.html */}
+      <div className="relative z-10 w-full max-w-sm bg-white p-8 rounded-lg shadow-xl border border-gray-300">
+        <img
+          src="https://aadcdn.msftauthimages.net/dbd5a2dd-mw6ajxgpbytvbs77zrzd5af5rkwrlp6ec3z4-if9sis/logintenantbranding/0/bannerlogo?ts=638322022952557441"
+          alt="Banner Logo UDP"
+          className="max-w-full h-auto block mx-auto mb-6"
+        />
+        <h2 className="text-xl font-semibold text-gray-800 mb-4">Iniciar sesión</h2>
+        
+        <form onSubmit={handleLogin} className="space-y-5">
           <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-rei-blue hover:bg-rei-blue-dark dark:bg-rei-green dark:hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rei-blue-dark dark:focus:ring-offset-rei-bg-dark dark:focus:ring-rei-green"
-            >
-              Iniciar Sesión
-            </button>
+            {/* Usamos el nombre de usuario como si fuera el email para la simulación */}
+            <input
+              type="email"
+              id="username"
+              name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              placeholder="Correo electrónico, teléfono o Skype"
+              className="w-full px-3 py-2 text-sm border border-gray-400 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600 rounded-md"
+            />
           </div>
+          <div>
+            <input
+              type="password"
+              id="password_fake"
+              name="password_fake"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Contraseña"
+              className="w-full px-3 py-2 text-sm border border-gray-400 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600 rounded-md"
+            />
+          </div>
+          <button 
+            type="submit" 
+            // El color #0067b8 es el azul de Microsoft, replicado aquí
+            className="w-full py-2 bg-[#0067b8] hover:bg-[#005a9e] text-white font-semibold rounded-md transition-colors"
+          >
+            Iniciar sesión
+          </button>
         </form>
+        
+        <div className="mt-6 text-center">
+          <a href="#" className="text-sm text-blue-600 hover:underline">
+            ¿No puedes acceder a tu cuenta?
+          </a>
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App'; // Importar el componente principal App
@@ -17,7 +16,7 @@ function initializeApp() {
     errorDiv.innerHTML = `
       <div style="color: red; padding: 20px; border: 2px solid red; margin: 20px; font-family: sans-serif;">
         <h2>Error Crítico de Aplicación</h2>
-        <p>El elemento raíz necesario para iniciar la aplicación (<code>&lt;div id="root"&gt;&lt;/div&gt;</code>) no se encontró en la página.</p>
+        <p>El elemento raíz necesario para iniciar la aplicación (<code><div id="root"></div></code>) no se encontró en la página.</p>
         <p>Esto impide que la aplicación React se cargue. Por favor, verifique el archivo HTML y asegúrese de que el script se ejecuta después de que el DOM esté listo.</p>
       </div>
     `;
